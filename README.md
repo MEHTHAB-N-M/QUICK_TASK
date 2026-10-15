@@ -1,151 +1,300 @@
-# AI-Powered Employee Task & Productivity Platform
+<div align="center">
 
-A modern, scalable enterprise full-stack web application designed for companies to manage employees, tasks, attendance, and productivity using AI-assisted automation, real-time communication, and detailed analytics. 
+# ⚡ QuickTask
 
-## Features
+**AI-powered employee task & productivity platform with real-time chat, attendance tracking, and predictive analytics.**
 
-- **Authentication System**: Secure JWT-based role-based access control (Admin, Manager, Employee).
-- **Admin Dashboard**: Comprehensive overview of employees, tasks, productivity metrics, and AI predictive analytics.
-- **Employee Dashboard**: Manage assigned tasks, track personal productivity, and view AI-generated suggestions.
-- **Task Management**: Create, assign, and track tasks with priorities, statuses, and due dates.
-- **Real-Time Communication**: WebSocket-powered team chat and real-time updates.
-- **AI/ML Productivity Engine**: Built-in predictive models for employee productivity scoring and efficiency trends using Scikit-Learn.
-- **Attendance Management**: Daily check-ins, check-outs, and attendance analytics.
-- **Reporting System**: Automated PDF report generation using ReportLab.
+🏆 *Evolved from a 24-hour college hackathon project (BCA)*
 
-## Tech Stack
+[![Live Demo](https://img.shields.io/badge/Demo-Live_Preview-success?style=for-the-badge&logo=githubpages)](https://mehthab7.github.io/QUICK_TASK/)
+[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-- **Frontend**: React 19, Tailwind CSS v4, Framer Motion, Recharts, Vite
-- **Backend**: Python 3.11, FastAPI, SQLAlchemy, WebSockets, PyJWT
-- **Database**: PostgreSQL (Production/Docker), SQLite (Local Dev)
-- **AI/ML**: Scikit-Learn, Pandas, NumPy
-- **Deployment**: Docker, Docker Compose, Nginx
+[Live Demo](https://mehthab7.github.io/QUICK_TASK/) · [Original Hackathon Version](https://github.com/MEHTHAB-N-M/Task_Management_App) · [Report Bug](https://github.com/MEHTHAB7/QUICK_TASK/issues)
 
-## Project Structure
+</div>
 
+---
+
+## 📑 Table of Contents
+
+- [Overview](#overview)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Option A: Docker (Recommended)](#option-a-docker-recommended)
+  - [Option B: Local Development](#option-b-local-development)
+- [API Reference](#api-reference)
+- [Demo Credentials](#demo-credentials)
+- [Deployment](#deployment)
+- [Project Story](#project-story)
+- [Author](#author)
+
+---
+
+## 📖 Overview
+
+**QuickTask** helps companies manage employees, tasks, and attendance all in one place. Role-based dashboards give admins, managers, and employees tailored views for their workflows. A built-in machine learning engine scores productivity and predicts efficiency trends, while WebSocket-powered chat keeps teams connected in real time.
+
+---
+
+## 📸 Screenshots
+
+| Admin Dashboard | AI Productivity Insights |
+| :---: | :---: |
+| <img src="docs/screenshots/admin.png" alt="Admin Dashboard" width="450"/> | <img src="docs/screenshots/ai.png" alt="AI Analytics" width="450"/> |
+
+| Task Management Board | Employee Dashboard |
+| :---: | :---: |
+| <img src="docs/screenshots/tasks.png" alt="Task Board" width="450"/> | <img src="docs/screenshots/employee.png" alt="Employee Dashboard" width="450"/> |
+
+| Attendance Tracking | Real-Time Team Chat |
+| :---: | :---: |
+| <img src="docs/screenshots/attendance.png" alt="Attendance Tracking" width="450"/> | <img src="docs/screenshots/chat.png" alt="Team Chat" width="450"/> |
+
+---
+
+## ✨ Features
+
+### 🔐 Access Control
+- JWT authentication with role-based access control (**Admin**, **Manager**, **Employee**)
+- Passwords hashed securely with **bcrypt**
+
+### 📋 Task & Team Management
+- Create, assign, and track tasks with priorities, statuses, and due dates
+- Role-filtered task views
+- Daily attendance check-in / check-out with duration analytics
+
+### 🤖 AI Productivity Engine
+- Productivity scoring and efficiency trend predictions using **Scikit-Learn**, **Pandas**, and **NumPy**
+- AI-generated suggestions on the employee dashboard
+- Predictive analytics and stats for administrators
+
+### 💬 Real-Time Communication
+- WebSocket team chat for live updates and instant messaging
+
+### 📊 Reporting
+- Automated PDF productivity reports generated via **ReportLab**
+
+---
+
+## 🧱 Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React 19, Vite, Tailwind CSS v4, Framer Motion, Recharts, Lucide React |
+| **Backend** | Python 3.11, FastAPI, SQLAlchemy, Alembic, WebSockets, PyJWT |
+| **Database** | PostgreSQL (Docker/Production), SQLite (Local Dev) |
+| **AI / ML** | Scikit-Learn, Pandas, NumPy, Joblib |
+| **Reporting** | ReportLab |
+| **DevOps & Cache** | Docker, Docker Compose, Nginx, Redis, GitHub Actions |
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart TD
+    A[React 19 Frontend<br/>Vite + Tailwind v4] -->|REST API + WebSockets| B[FastAPI Backend]
+    B --> C[API Routes / Endpoints]
+    C --> D[Services / CRUD Layer]
+    D --> E[(PostgreSQL / SQLite)]
+    B --> F[ML Engine<br/>Scikit-Learn / Joblib]
+    B --> G[(Redis Cache)]
+    B --> H[PDF Reports<br/>ReportLab]
 ```
+
+The backend follows a clean, layered design: **API routes → Services/CRUD → Database models**.
+
+---
+
+## 📂 Project Structure
+
+```text
 .
-├── backend/            # FastAPI Backend, ML models, and Database Migrations (Alembic)
-├── frontend/           # React 19 + Tailwind CSS v4 Vite App
-├── database/           # Database schema and initial seeds
-├── docker/             # Docker configurations
-├── docs/               # Architecture and project documentation
-├── ml_models/          # Saved Scikit-Learn models and training data
-├── docker-compose.yml  # Docker Compose orchestration
-└── README.md           # This documentation
+├── .github/          # GitHub Actions CI/CD workflows (Pages deployment)
+├── backend/          # FastAPI app, ML models, and Alembic migrations
+│   ├── alembic/      # Database migration scripts
+│   ├── app/          # Core FastAPI routes, schemas, models, and CRUD
+│   ├── ml_models/    # Saved trained models (joblib)
+│   └── requirements.txt
+├── frontend/         # React 19 + Tailwind CSS v4 Vite App
+│   ├── src/          # Components, pages, services, and hooks
+│   └── package.json
+├── database/         # Database initialization scripts and schemas
+├── docker/           # Docker configuration files
+├── docs/             # Documentation and assets
+├── ml_models/        # Pre-trained models and dataset generators
+├── docker-compose.yml# Multi-container orchestration
+└── README.md         # Project documentation
 ```
 
-## Installation & Setup Guide (Local Development)
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- Python (3.10+)
-- PostgreSQL (Optional for local, required for production)
-- Docker & Docker Compose (Optional but recommended)
 
-### 1. Backend Setup
+- **Node.js** (v18+)
+- **Python** (3.10+)
+- **Docker & Docker Compose** (optional, recommended)
+- **PostgreSQL** (optional locally, SQLite is used by default)
+
+---
+
+### Option A: Docker (Recommended)
+
+Run the full stack (Frontend, Backend, PostgreSQL, and Redis) with a single command:
+
+```bash
+docker-compose up -d --build
+```
+
+| Service | URL |
+| :--- | :--- |
+| **Frontend** | `http://localhost` |
+| **Backend API** | `http://localhost:8000` |
+| **API Docs (Swagger)** | `http://localhost:8000/docs` |
+
+To stop all services:
+```bash
+docker-compose down
+```
+
+---
+
+### Option B: Local Development
+
+#### 1. Backend
 
 ```bash
 cd backend
 
-# Create and activate virtual environment
+# Create virtual environment
 python -m venv venv
-# On Windows
-.\venv\Scripts\activate
-# On Mac/Linux
+
+# Activate virtual environment
+# Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+# Windows (cmd):
+.\venv\Scripts\activate.bat
+# Linux / macOS:
 source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run migrations (if using SQLite, app.db will be created automatically)
+# Run migrations (creates app.db if using SQLite)
 alembic upgrade head
 
-# Start the development server
+# Start the FastAPI server
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-The backend will be available at `http://localhost:8000`. API docs are at `http://localhost:8000/docs`.
+Backend API will be live at `http://localhost:8000` (Swagger UI: `http://localhost:8000/docs`).
 
-### 2. Frontend Setup
+#### 2. Frontend
 
 ```bash
 cd frontend
 
-# Install dependencies
+# Install npm dependencies
 npm install
 
-# Start development server
+# Start Vite dev server
 npm run dev
 ```
-The frontend will be available at `http://localhost:5173`.
+Frontend will be running at `http://localhost:5173`.
 
-## Deployment Guide (Docker)
+---
 
-The easiest way to run the entire stack (PostgreSQL, Redis, Backend, Frontend with Nginx) is via Docker Compose.
+## 📡 API Reference
 
-```bash
-# Build and start all services in detached mode
-docker-compose up -d --build
-```
+Interactive Swagger documentation is available at: **`http://localhost:8000/docs`**
 
-### Services Started:
-- **Frontend**: `http://localhost` (Port 80)
-- **Backend API**: `http://localhost:8000` (Port 8000)
-- **Database**: PostgreSQL on port 5432
-- **Cache**: Redis on port 6379
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/v1/auth/login` | Authenticate user and receive JWT access token |
+| `POST` | `/api/v1/users/` | Create a user / employee |
+| `GET` | `/api/v1/tasks/` | List tasks (filtered by authenticated user's role) |
+| `POST` | `/api/v1/tasks/` | Create a new task |
+| `POST` | `/api/v1/attendance/check-in` | Record daily employee check-in |
+| `POST` | `/api/v1/attendance/check-out` | Record employee check-out |
+| `GET` | `/api/v1/attendance/` | Get attendance history for the authenticated user |
+| `GET` | `/api/v1/analytics/dashboard-stats` | Aggregated dashboard statistics and trends |
+| `POST` | `/api/v1/analytics/predict-productivity` | AI productivity prediction based on metrics |
+| `GET` | `/api/v1/reports/productivity-report` | Generate a downloadable PDF report |
+| `WS` | `/api/v1/ws/chat` | WebSocket channel for real-time team communication |
 
-To stop the services:
-```bash
-docker-compose down
-```
+---
 
-## API Documentation
+## 🔑 Demo Credentials
 
-The backend exposes a fully documented REST API. When running the backend locally or via Docker, you can view the interactive Swagger documentation at:
-
-**URL**: `http://localhost:8000/docs`
-
-### Key Endpoints
-
-- `POST /api/v1/auth/login` - Authenticate user and get JWT token
-- `POST /api/v1/users/` - Create a new user/employee
-- `GET /api/v1/tasks/` - List all tasks (filtered by user role)
-- `POST /api/v1/tasks/` - Create a task
-- `GET /api/v1/analytics/dashboard-stats` - Get aggregated dashboard statistics
-- `POST /api/v1/analytics/predict-productivity` - AI prediction endpoint
-- `GET /api/v1/reports/productivity-report` - Generate PDF report
-- `WS /api/v1/ws/chat` - WebSocket endpoint for real-time team communication
-
-## Code Quality & Architecture
-
-- **Clean Architecture**: Backend follows a layered architecture (API routes -> Services/CRUD -> Database Models).
-- **Security**: Password hashing with bcrypt, JWT token validation, CORS configuration.
-- **UI/UX**: Modern glassmorphism UI with smooth Framer Motion animations and responsive layouts.
-
-## Default Seeded Credentials
+The seeded local database (`backend/app.db`) includes the following demo accounts:
 
 | Role | Email | Password | Description |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@example.com` | `password123` | Full administrator overview, analytics & management |
+| **Admin** | `admin@example.com` | `password123` | Full administrative control & predictive analytics |
 | **Manager** | `manager@example.com` | `password123` | Team task assignment and productivity monitoring |
-| **Employee** | `employee@example.com` | `password123` | Employee task execution & attendance check-ins |
-| **Employee** | `mehthab@gmail.com` | `12345678` | Personal task board and tracking |
+| **Employee** | `employee@example.com` | `password123` | Employee task execution & attendance tracking |
+| **Employee** | `mehthab@gmail.com` | `12345678` | Personal task board & tracking |
 
-## GitHub Actions & GitHub Pages Deployment
+> [!NOTE]
+> These credentials are for demo/evaluation purposes only. Update or remove them before any production deployment.
 
-This repository includes an automated GitHub Actions CI/CD workflow (`.github/workflows/deploy.yml`) to build and deploy the React frontend directly to **GitHub Pages**.
+---
 
-### Enabling GitHub Pages in Repository Settings:
-1. Navigate to your repository on GitHub: `https://github.com/MEHTHAB7/QUICK_TASK`
-2. Click on **Settings** -> **Pages** (in the left sidebar under Code and automation).
-3. Under **Build and deployment** -> **Source**, select **GitHub Actions**.
-4. Push to the `main` branch or trigger the workflow manually from the **Actions** tab.
-5. Once deployed, the frontend will be live at:
-   `https://mehthab7.github.io/QUICK_TASK/`
+## ☁️ Deployment
 
-### Connecting the Frontend to a Production Backend:
-If hosting the FastAPI backend on a cloud provider (e.g. Render, Railway, Fly.io, or VPS):
-1. In repository **Settings** -> **Secrets and variables** -> **Actions**:
-   - Add variable/secret `VITE_API_BASE_URL` (e.g., `https://your-api.onrender.com/api/v1`)
-   - Add variable/secret `VITE_WS_BASE_URL` (e.g., `wss://your-api.onrender.com/api/v1/ws/chat`)
-2. The deployment workflow will automatically use these endpoints when building the application.
+### Frontend (GitHub Pages)
+
+The frontend automatically deploys to GitHub Pages using the included workflow ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)):
+
+1. In GitHub, navigate to **Settings** → **Pages**.
+2. Under **Build and deployment** → **Source**, select **GitHub Actions**.
+3. Push to `main` (or run the workflow manually from the **Actions** tab).
+4. Live site: **`https://mehthab7.github.io/QUICK_TASK/`**
+
+### Connecting to a Hosted Backend
+
+When deploying your FastAPI backend on cloud platforms (such as Render, Railway, Fly.io, or VPS), configure the following environment variables under **Settings** → **Secrets and variables** → **Actions**:
+
+| Variable | Example Value | Description |
+| :--- | :--- | :--- |
+| `VITE_API_BASE_URL` | `https://your-api.onrender.com/api/v1` | Base REST API endpoint |
+| `VITE_WS_BASE_URL` | `wss://your-api.onrender.com/api/v1/ws/chat` | Real-time WebSocket endpoint |
+
+---
+
+## 📚 Project Story
+
+QuickTask originated as [Task_Management_App](https://github.com/MEHTHAB-N-M/Task_Management_App), a 24-hour hackathon project built during BCA. 
+
+This repository is an enterprise-grade evolution built with:
+- **Role-Based Access Control** (Admin, Manager, Employee)
+- **AI/ML Productivity Engine** for real-time score prediction
+- **Real-Time WebSocket Chat** for team communication
+- **Attendance Management & PDF Reporting**
+- **Dockerized Container Architecture** and automated CI/CD deployment
+
+---
+
+## 👨‍💻 Author
+
+**Mehthab N M** — *Full-Stack & Python Developer*
+
+- 🌐 [Portfolio](https://mehthab-n-m.github.io/My_portfolio/)
+- 🐙 [GitHub](https://github.com/MEHTHAB-N-M)
+- 💼 [LinkedIn](https://www.linkedin.com/in/mehthab-n-m-637611344)
+
+---
+
+<div align="center">
+⭐ If you find this project helpful or inspiring, please give it a star!
+</div>
