@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Send, MessageSquare } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -22,7 +22,7 @@ const TeamChat = () => {
       try {
         const message = JSON.parse(event.data);
         setMessages((prev) => [...prev, message]);
-      } catch (e) {
+      } catch {
         // Fallback for raw text
         setMessages((prev) => [...prev, { text: event.data, sender: 'System', timestamp: new Date().toISOString() }]);
       }

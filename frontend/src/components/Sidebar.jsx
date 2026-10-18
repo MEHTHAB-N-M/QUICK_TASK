@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, CheckSquare, Clock, LogOut, Brain, MessageSquare } from 'lucide-react';
 import { useContext } from 'react';

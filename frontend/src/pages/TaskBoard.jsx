@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import api from '../services/api';
 import { motion } from 'framer-motion';
-import { Plus, Clock, AlertCircle, Trash2 } from 'lucide-react';
+import { Plus, Clock, Trash2 } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
 const TaskBoard = () => {
@@ -12,23 +12,16 @@ const TaskBoard = () => {
   const [newTask, setNewTask] = useState({ title: '', description: '', priority: 'Medium', assigned_to_id: '', due_date: '' });
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetchTasks();
-    if (user?.role === 'admin' || user?.role === 'manager') {
-      fetchUsers();
-    }
-  }, [user]);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const response = await api.get('/users/');
       setUsers(response.data);
     } catch (error) {
       console.error('Failed to fetch users', error);
     }
-  };
+  }, []);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const response = await api.get('/tasks/');
       setTasks(response.data);
@@ -37,7 +30,14 @@ const TaskBoard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchTasks();
+    if (user?.role === 'admin' || user?.role === 'manager') {
+      fetchUsers();
+    }
+  }, [user, fetchTasks, fetchUsers]);
 
   const handleCreateTask = async (e) => {
     e.preventDefault();

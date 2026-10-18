@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
 import { motion } from 'framer-motion';
 import { LogIn, LogOut, CheckCircle } from 'lucide-react';
@@ -8,11 +8,7 @@ const AttendanceLog = () => {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
 
-  useEffect(() => {
-    fetchLogs();
-  }, []);
-
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     try {
       const response = await api.get('/attendance/');
       setLogs(response.data);
@@ -21,7 +17,11 @@ const AttendanceLog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchLogs();
+  }, [fetchLogs]);
 
   const handleCheckIn = async () => {
     setActionLoading(true);

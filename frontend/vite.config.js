@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import process from 'node:process'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,6 +9,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: process.env.VITE_BASE_PATH || (process.env.NODE_ENV === 'production' ? '/QUICK_TASK/' : '/'),
+  base: process.env.VITE_BASE_PATH || '/',
 })
 

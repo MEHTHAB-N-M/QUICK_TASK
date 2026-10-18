@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area
 } from 'recharts';
 import { Users, CheckSquare, Brain, Activity, TrendingUp, Download } from 'lucide-react';
 import api from '../services/api';
@@ -18,15 +18,9 @@ const AnalyticsDashboard = () => {
     meetings_attended: 4
   });
   const [predictedScore, setPredictedScore] = useState(null);
-  const { user } = React.useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (user?.role !== 'employee') {
-      fetchStats();
-    }
-  }, [user]);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const response = await api.get('/analytics/dashboard-stats');
       setStats(response.data);
@@ -35,7 +29,13 @@ const AnalyticsDashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (user?.role !== 'employee') {
+      fetchStats();
+    }
+  }, [user, fetchStats]);
 
   const handlePredict = async () => {
     try {
